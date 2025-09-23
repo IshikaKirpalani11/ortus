@@ -1,0 +1,691 @@
+/* -------------------------------
+   Page4-only styles
+   ------------------------------- */
+
+:root {
+  --cream: #fbf7f4;
+  --muted: #6b6b6b;
+  --container: 1100px;
+}
+
+.page4-wrapper * {
+  box-sizing: border-box;
+}
+
+.page4-wrapper {
+  margin: 0;
+  background: var(--cream);
+  color: #111;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* NAV (scoped to page4) */
+.page4-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+  z-index: 1000;
+  color: white;
+}
+
+.page4-nav-logo {
+  font-size: 43px;
+  letter-spacing: 5px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.page4-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 88px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.page4-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.page4-nav-links a:hover {
+  opacity: 0.7;
+}
+
+
+
+
+
+.page4-hero {
+  position: relative;
+}
+
+.page4-hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page4-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* push to bottom */
+  padding: 60px;            /* side + bottom padding */
+  color: #fff;
+}
+
+.page4-building {
+  font-size: 15px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.page4-title {
+  font-size: 42px;
+  font-weight: 400;
+  font-family: "Playfair Display", serif;
+  font-variant-numeric: lining-nums; /* make numbers same height as caps */
+  margin: 0;
+  max-width: 60%;
+}
+
+
+.page4-price {
+  position: absolute;
+  top: 91%;          /* was 50% */
+  right: 60px;
+  transform: translateY(-50%);
+  font-size: 38px;
+  font-weight: 500;
+}
+
+
+
+.project-details {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.page-trail {
+  font-size: 19px;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.page-trail a {
+  color: #555;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+
+.project-header h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.project-header p {
+  font-size: 18px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Two-column layout */
+.profile-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  align-items: flex-end;   /* ✅ Align both left and right to the bottom */
+  gap: 40px;
+}
+
+/* Parent container */
+.profile-section {
+  display: flex;
+  flex-direction: column;  /* ⬇️ Stack vertically */
+  align-items: flex-end;   /* ⬅️ Keep everything on the right */
+}
+
+.profile-right {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 30px;  
+  margin-top: -680px;   /* 🔼 Pull upward */
+}
+
+
+/* Left column (text below right) */
+.profile-left {
+  width: 65%;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #333;
+  text-align: left;   /* optional: keep text aligned to right */
+  margin-top: 180px;    /* ⬇️ Push text further down */
+}
+
+
+
+
+
+.profile-card {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  background: #ccc;
+  margin: 0 auto 15px;
+}
+
+.profile-card h3 {
+  margin: 10px 0 5px;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.designation {
+  font-size: 13px;
+  color: #777;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.contact-buttons button {
+  padding: 7px 14px;
+  border: 1px solid #333;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+
+
+/* Bottom icons row */
+.bottom-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 500px;
+  gap: 80px;
+}
+
+.icon-item {
+  text-align: center;
+  font-size: 13px;
+}
+
+.icon-item span {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+
+/* Make gallery section full-width */
+.project-gallery .container {
+  max-width: 90%;     /* remove max-width constraint */
+  padding-left: 10px;  /* small padding for scroll */
+  padding-right: 10px; /* small padding for scroll */
+}
+
+.project-gallery {
+  padding: 50px 0;
+}
+
+
+.project-gallery h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.gallery-wrapper {
+  overflow-x: auto;      /* enable horizontal scroll */
+  overflow-y: hidden;
+  white-space: nowrap;   /* keep images in one line */
+  padding-bottom: 1px;
+   padding-left: 0;       /* remove extra left space */
+  padding-right: 0;      /* remove extra right space */
+}
+
+.gallery-scroll img {
+  height: 570px;         /* ⬆️ Bigger landscape images */
+  width: auto;           /* keep aspect ratio */
+  display: inline-block;
+  margin-right: 30px;    /* a bit more spacing between images */
+  border-radius: 3px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.gallery-scroll img:last-child {
+  margin-right: 0;
+}
+
+.project-text {
+  padding: 60px 20px 60px 80px;  /* top, right, bottom, left */
+  text-align: left;               /* keep text left-aligned */
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+
+.project-text .container {
+  max-width: 800px;             /* limit width for better readability */
+  margin: 0 auto;               /* center container */
+}
+
+.amenities-section {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.amenities-section h3 {
+  font-size: 26px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.amenities-row {
+  display: flex;
+  justify-content: space-between;  /* 6 items evenly spaced */
+  flex-wrap: wrap;                  /* wrap on smaller screens */
+  gap: 20px;                        /* spacing between items */
+}
+
+.amenity-item {
+  flex: 1 1 calc(16.66% - 20px);   /* 6 items per row with gaps */
+  max-width: 150px;                 /* optional max width */
+  text-align: center;
+}
+
+.amenity-item span {
+  font-size: 40px;                  /* icon size */
+  display: block;
+  margin-bottom: 10px;
+}
+
+.amenity-item p {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+.similar-properties .container {
+  max-width: 100%;      /* remove container max-width */
+  padding-left: 10px;   /* small padding so content doesn't touch edge */
+  padding-right: 10px;  /* small padding so content doesn't touch edge */
+  margin: 0 auto;       /* center container */
+}
+
+
+
+.similar-properties {
+  padding: 60px 0;          /* remove left/right padding, reduce top/bottom */
+  background-color: #f9f9f9;
+}
+
+.similar-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  justify-content: flex-start; 
+}
+
+.similar-heading {
+  flex: 0 0 auto;
+  text-align: left;
+  margin-top: 150px;          /* bring heading slightly down */
+}
+
+.similar-heading h3 {
+  font-size: 36px;
+  color: #333;
+  margin: 0;
+}
+
+.similar-heading h3 em {
+  font-style: italic;
+}
+
+/* Horizontal scroll gallery */
+.similar-gallery-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  flex: 1; 
+}
+
+.similar-gallery-scroll img {
+  height: 350px;            /* make images bigger */
+  width: auto;
+  display: inline-block;
+  margin-right: 20px;
+  border-radius: 5px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.similar-gallery-scroll img:last-child {
+  margin-right: 0;
+}
+
+
+
+
+.contact-section {
+  padding: 80px 0;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+}
+.contact-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 150px;
+  margin-left: -190px; /* moves only the left text */
+}
+
+.contact-left h3 {
+  font-size: 64px;          /* bigger heading */
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.contact-left h3 em {
+  font-style: italic;
+}
+
+.contact-left p {
+  margin-top: 25px;
+  font-size: 20px;          /* bigger paragraph */
+  max-width: 420px;         /* allow text to breathe */
+  color: #333;
+}
+
+.contact-right {
+  flex: 1.9;
+  background: #000;
+  padding: 60px;
+  color: #fff;
+  margin-left: auto; 
+  margin-right: -190px; /* negative margin pushes it beyond container */
+  max-width: 1000px;
+}
+
+
+
+
+.contact-right h4 {
+  margin-bottom: 15px;
+  font-size: 22px; /* bigger heading */
+}
+
+.contact-right p {
+  margin-bottom: 25px;
+  font-size: 16px; /* slightly larger text */
+  color: #ccc;
+}
+
+.contact-form .form-row {
+  display: flex;
+  gap: 15px; /* more spacing */
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 16px; /* bigger input fields */
+  margin-bottom: 20px;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-size: 16px; /* larger text inside inputs */
+}
+
+.contact-form textarea {
+  min-height: 150px; /* taller textarea */
+}
+
+.btn-submit {
+  background: #fff;
+  color: #000;
+  padding: 16px 28px; /* bigger button */
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px; /* bigger button text */
+}
+
+
+.footer-section {
+  background: #fcf9f7;
+  padding: 50px 0px;
+  font-family: "Inter", sans-serif;
+  color: #111;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.footer-logo {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 6px;
+}
+
+.footer-news-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.footer-news-sub {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.footer-form {
+  display: flex;
+  max-width: 350px;
+}
+
+.footer-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.footer-form button {
+  background: #000;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.footer-bottom-grid {
+   width: 100% !important;
+  max-width: none !important;   /* remove your 1200px limit */
+  margin: 0 !important;         /* no auto-centering */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Column headings */
+.footer-col h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #111;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.footer-col h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* Lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 6px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+}
+
+.footer-col ul li a:hover {
+  color: #000;
+}
+
+/* Contact info */
+.contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #111;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* SVG icon common */
+.icon-svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  stroke: #111;
+  stroke-width: 1.2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* Contact column takes full height */
+.contact-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between; /* ensures space between top info & bottom icons */
+}
+
+/* Social icons pinned lower and larger */
+.social-icons {
+  margin-top: auto;         /* push to bottom */
+  padding-top: 40px;        /* extra breathing room */
+  display: flex;
+  gap: 20px;                /* wider spacing */
+  font-size: 1.6rem;        /* enlarge icons (adjust as needed) */
+}
+
+.social-icons a i,
+.social-icons svg {
+  font-size: 1.6rem;        /* ensure actual icon enlarges */
+}
+
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #111;
+  transition: background 160ms, color 160ms;
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* hover */
+.social-link:hover {
+  background: rgba(0,0,0,0.04);
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .footer-bottom-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-icons { gap: 12px; }
+}
+
+
+
+
+
+
+
+
+

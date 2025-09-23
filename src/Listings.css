@@ -1,0 +1,28 @@
+.listings-page {
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filters select,
+.filters button {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.more-filters {
+  background: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.clear-filters {
+  background: #d9534f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

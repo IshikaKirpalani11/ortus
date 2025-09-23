@@ -1,9 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";   // ✅ import navigate
 import "./HomePage.css";
 
 const HomePage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [frame, setFrame] = useState(1);
+  const [finished, setFinished] = useState(false);
+  const navigate = useNavigate();  // ✅ hook for navigation
 
+  // Play through 562 images ONCE (001 → 562)
+  useEffect(() => {
+    const totalFrames = 562;
+    const interval = setInterval(() => {
+      setFrame((prev) => {
+        if (prev < totalFrames) {
+          return prev + 1;
+        } else {
+          clearInterval(interval);
+          setFinished(true);
+          return prev;
+        }
+      });
+    }, 60);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Animate-on-scroll observer
   useEffect(() => {
     const els = document.querySelectorAll(".animate-on-scroll");
     const io = new IntersectionObserver(
@@ -23,102 +45,157 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
+      {/* IMAGE SEQUENCE "VIDEO" */}
+      <div className={`image-sequence ${finished ? "fade-out" : ""}`}>
+        <img
+          src={`/images/CLOUD_3 (1)${String(frame).padStart(3, "0")}.png`}
+          alt="sequence"
+        />
+      </div>
+
       {/* NAV */}
       <nav className="navbar">
         <div className="nav-logo">ORTUS</div>
 
-        <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#buy">Buy</a></li>
-          <li><a href="#rent">Rent</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#sell">Sell with us</a></li>
-          <li><a href="#communities">Communities</a></li>
-          <li><a href="#lifestyle">Lifestyle</a></li>
-          <li><a href="#about">About Ortus</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <ul className="nav-links">
+  <li><a href="#home">Home</a></li>
+  <li><button onClick={() => navigate("/page1?type=buy")} className="nav-btn">Buy</button></li>
+  <li><button onClick={() => navigate("/page1?type=rent")} className="nav-btn">Rent</button></li>
+
+  {/* Updated Projects button */}
+  <li>
+    <button
+      className="nav-btn"
+      onClick={() => {
+        const el = document.getElementById("hero-banner");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }}
+    >
+      Projects
+    </button>
+  </li>
+
+  <li><a href="#sell">Sell with us</a></li>
+  <li>
+  <button
+    className="nav-btn"
+    onClick={() => navigate("/page3")}
+  >
+    Communities
+  </button>
+</li>
+
+  <li>
+  <button
+    className="nav-btn"
+    onClick={() => {
+      const el = document.getElementById("investment");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }}
+  >
+    Lifestyle
+  </button>
+</li>
+
+  <li>
+  <button
+    className="nav-btn"
+    onClick={() => {
+      const el = document.getElementById("bg-highlight");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }}
+  >
+    About Ortus
+  </button>
+</li>
+
+  <li><a href="#contact">Contact</a></li>
+</ul>
+
       </nav>
 
- {/* HERO */}
-<section className="hero">
-  <img className="hero-image" src="/images/hero.jpg" alt="hero" />
-  <div className="hero-overlay">
+      {/* HERO */}
+      <section className="hero">
+        <img className="hero-image" src="/images/hero.jpg" alt="hero" />
+        <div className="hero-overlay">
+          {/* Tabs (Buy / Rent / Off-plan) */}
+          <div className="hero-tabs">
+            <span className="tab active" onClick={() => navigate("/page1?type=buy")}>Buy</span>
+            <span className="tab" onClick={() => navigate("/page1?type=rent")}>Rent</span>
+            <span className="tab">Off-plan</span>
+          </div>
 
-    {/* Tabs (Buy / Rent / Off-plan) */}
-    <div className="hero-tabs">
-      <span className="tab active">Buy</span>
-      <span className="tab">Rent</span>
-      <span className="tab">Off-plan</span>
-    </div>
+          {/* Search Box */}
+          <div className="hero-search">
+            <div className="hero-search-left">
+              <label className="search-label">Location</label>
+              <input placeholder="Area," />
+            </div>
+            <div className="hero-search-filters">
+              <span>Filters</span>
+            </div>
+            <button className="hero-search-btn">
+              <span className="search-icon">🔍</span> 1,049 results
+            </button>
+          </div>
+        </div>
+      </section>
+    
 
-    {/* Search Box */}
-    <div className="hero-search">
-      <div className="hero-search-left">
-        <label className="search-label">Location</label>
-        <input placeholder="Area," />
-      </div>
-      <div className="hero-search-filters">
-        <span>Filters</span>
-      </div>
-      <button className="hero-search-btn">
-        <span className="search-icon">🔍</span> 1,049 results
-      </button>
+{/* GREY TRANSITION SCREEN */}
+<section className="transition-screen">
+  <div id="intro" className="hero-section">
+    <div className="hero-inner animate-on-scroll">
+      <h1
+        className="hero-title"
+        aria-label="Your bespoke living to disconnect and reconnect"
+      >
+        {/* First line */}
+        <div className="title-line line-1">
+          <span className="your">Your</span>
+          <span className="bespoke">bespoke living</span>
+        </div>
+
+        {/* Second line */}
+        <div className="title-line line-2">to disconnect</div>
+
+        {/* Third line */}
+        <div className="title-line line-3">
+          <span className="amp">&amp;</span>
+          <span className="reconnect">reconnect</span>
+        </div>
+      </h1>
+
+      <p className="hero-sub">
+        ORTUS is a discreet real estate investment firm serving ultra-high-net-worth
+        individuals.
+        <br />
+        <br />
+        We operate like a private bank for real estate — each client is carefully
+        vetted, each opportunity is curated, and each transaction is managed with
+        ultra precision. No mass listings. No open houses. Just intelligent
+        acquisitions for those who live in rare air.
+      </p>
+
+      <a href="#contact" className="connect-link">
+        CONTACT US
+      </a>
     </div>
   </div>
 </section>
-
-
-   <section id="intro" className="hero-section">
-      <div className="hero-inner">
-        <h1
-          className="hero-title"
-          aria-label="Your bespoke living to disconnect and reconnect"
-        >
-          {/* First line */}
-          <div className="title-line line-1">
-            <span className="your">Your</span>
-            <span className="bespoke">bespoke living</span>
-          </div>
-
-          {/* Second line */}
-          <div className="title-line line-2">to disconnect</div>
-
-          {/* Third line */}
-          <div className="title-line line-3">
-            <span className="amp">&amp;</span>
-            <span className="reconnect">reconnect</span>
-          </div>
-        </h1>
-
-        <p className="hero-sub">
-          ORTUS is a discreet real estate investment firm serving ultra-high-net-worth
-          individuals.
-          <br />
-          <br />
-          We operate like a private bank for real estate — each client is carefully
-          vetted, each opportunity is curated, and each transaction is managed with
-          ultra precision. No mass listings. No open houses. Just intelligent
-          acquisitions for those who live in rare air.
-        </p>
-
-        <a href="#contact" className="connect-link">
-          CONTACT US
-        </a>
-      </div>
-    </section>
-
-
 
 {/* VIDEO PREVIEW */}
-<section className="video-section section">
+<section className="video-section section transition-screen">
   <div className="video-preview animate-on-scroll">
     <img src="/images/project-video.png" alt="project preview" />
-    
     <button className="play-btn" aria-label="play preview">▶</button>
-    
   </div>
 </section>
+
+
+
+
+
 
 
 <section id="listings" className="listings section">
@@ -129,56 +206,91 @@ const HomePage = () => {
 
         <div className="listings-row">
           <div className="listings-left animate-on-scroll">
-            <p className="small-meta">Our newest residences</p>
-            <h4>Explore curated properties</h4>
-            <p className="muted">
-              At the very top, life takes on a different rhythm. Wrapped in glass
-              and kissed by the sky, ORTUS penthouses offer panoramic views,
-              expansive terraces, and bespoke interiors—a rarefied world above
-              it all, designed for those who dwell in distinction.
-            </p>
-            <a href="#" className="view-link">
-              VIEW LISTINGS <span>➜</span>
-            </a>
-          </div>
+  <p className="small-meta">Our newest residences</p>
+  <h4>Explore curated properties</h4>
+  <p className="muted">
+    At the very top, life takes on a different rhythm. Wrapped in glass
+    and kissed by the sky, ORTUS penthouses offer panoramic views,
+    expansive terraces, and bespoke interiors—a rarefied world above
+    it all, designed for those who dwell in distinction.
+  </p>
+ <a
+  href="#"
+  className="view-link"
+  onClick={(e) => {
+    e.preventDefault();
+    navigate("/page1");       // navigate to Page1.jsx
+    window.scrollTo(0, 0);    // scroll to top
+  }}
+>
+  VIEW LISTINGS <span>➜</span>
+</a>
 
-          <div className="listings-cards">
-            <article className="card animate-on-scroll">
-              <img src="/images/apartment1.png" alt="apartment" />
-              <div className="card-body">
-                <h5>Lorem Ipsum is simply dummy</h5>
-                <p className="price">AED 482,500,000</p>
-                <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
-              </div>
-            </article>
+</div>
 
-            <article className="card animate-on-scroll">
-              <img src="/images/villa.png" alt="villa" />
-              <div className="card-body">
-                <h5>Lorem Ipsum is simply dummy</h5>
-                <p className="price">AED 482,500,000</p>
-                <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
-              </div>
-            </article>
 
-            <article className="card animate-on-scroll">
-              <img src="/images/duplex.png" alt="duplex" />
-              <div className="card-body">
-                <h5>Lorem Ipsum is simply dummy</h5>
-                <p className="price">AED 482,500,000</p>
-                <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
-              </div>
-            </article>
+         <div className="listings-cards">
+  <article
+    className="card animate-on-scroll"
+    onClick={() => {
+      navigate("/page4");
+      window.scrollTo(0, 0);
+    }}
+  >
+    <img src="/images/apartment1.png" alt="apartment" />
+    <div className="card-body">
+      <h5>Lorem Ipsum is simply dummy</h5>
+      <p className="price">AED 482,500,000</p>
+      <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
+    </div>
+  </article>
 
-            <article className="card animate-on-scroll">
-              <img src="/images/gallery1.png" alt="interior" />
-              <div className="card-body">
-                <h5>Lorem Ipsum is simply dummy</h5>
-                <p className="price">AED 482,500,000</p>
-                <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
-              </div>
-            </article>
-          </div>
+  <article
+    className="card animate-on-scroll"
+    onClick={() => {
+      navigate("/page4");
+      window.scrollTo(0, 0);
+    }}
+  >
+    <img src="/images/villa.png" alt="villa" />
+    <div className="card-body">
+      <h5>Lorem Ipsum is simply dummy</h5>
+      <p className="price">AED 482,500,000</p>
+      <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
+    </div>
+  </article>
+
+  <article
+    className="card animate-on-scroll"
+    onClick={() => {
+      navigate("/page4");
+      window.scrollTo(0, 0);
+    }}
+  >
+    <img src="/images/duplex.png" alt="duplex" />
+    <div className="card-body">
+      <h5>Lorem Ipsum is simply dummy</h5>
+      <p className="price">AED 482,500,000</p>
+      <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
+    </div>
+  </article>
+
+  <article
+    className="card animate-on-scroll"
+    onClick={() => {
+      navigate("/page4");
+      window.scrollTo(0, 0);
+    }}
+  >
+    <img src="/images/gallery1.png" alt="interior" />
+    <div className="card-body">
+      <h5>Lorem Ipsum is simply dummy</h5>
+      <p className="price">AED 482,500,000</p>
+      <p className="meta">5 ▪ 7 ▪ 43,830 SQ.FT.</p>
+    </div>
+  </article>
+</div>
+
         </div>
       </div>
     </section>
@@ -243,24 +355,36 @@ const HomePage = () => {
   </div>
 </section>
 
-
-
- {/* PROJECT INTRO / BANNER SECTION */}
-<section id="project-intro" className="project-intro">
+{/* HERO BANNER SECTION */}
+<section id="hero-banner" className="hero-banner">
   {/* Banner Image */}
-  <img src="/images/project-intro.png" alt="project intro" className="project-intro-img" />
+  <img src="/images/project-intro.png" alt="hero banner" className="hero-banner-img" />
 
   {/* Overlay + Text */}
-  <div className="project-overlay">
-    <div className="project-text animate-on-scroll">
+  <div className="hero-overlay">
+    <div className="hero-text animate-on-scroll">
       <h2>
         Explore your <em>personal residence</em><br />
         at <em>global brands</em>
       </h2>
-      <p className="project-name">PROJECT NAME</p>
+     <p className="hero-name">
+  PROJECT NAME{" "}
+  <span
+    className="arrow"
+    onClick={() => {
+      navigate("/page2");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    style={{ cursor: "pointer" }}
+  >
+    ➜
+  </span>
+</p>
+
     </div>
   </div>
 </section>
+
 
 
 
@@ -294,15 +418,17 @@ const HomePage = () => {
         </div>
 
         <div className="resort-block">
-  <h4>
-    <em>Resort</em> living
-  </h4>
-  <p>
-    Every day, an escape. Every corner, a retreat. Discover serenity made permanent.
-  </p>
-  <a href="#" className="view-link">
-    VIEW LISTINGS <span className="dot">→</span>
-  </a>
+ <h4>
+  <em>Resort</em> living
+</h4>
+<p>
+  Every day, an escape. Every corner, a retreat. <br />
+  Discover serenity made permanent.
+</p>
+<a href="#" className="view-link">
+  VIEW LISTINGS <span className="dot">→</span>
+</a>
+
 </div>
 
       </div>

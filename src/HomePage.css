@@ -46,6 +46,34 @@ body{
 }
 .nav-links a:hover{ opacity:0.7; }
 
+/* IMAGE SEQUENCE (Fake Video) */
+.image-sequence {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 9999; /* keep on top until fade */
+  background: black;
+  transition: opacity 1.5s ease;
+}
+
+.image-sequence img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Fade out after sequence finishes */
+.image-sequence.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+
+
+
 /* HERO */
 .hero {
   position: relative;
@@ -152,6 +180,40 @@ body{
   font-size: 14px;
 }
 
+.transition-screen {
+  position: relative;
+  background: #f9f8f8;   /* grey background */
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;   /* push content to top */
+  justify-content: flex-start; /* align left */
+  overflow: hidden;
+  padding: 60px;             /* optional: breathing room from edges */
+}
+
+
+
+/* Inner content starts lower and invisible */
+.transition-screen .hero-inner {
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 1.2s ease;
+}
+
+/* When scrolled into view */
+.transition-screen .hero-inner.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+/* When scrolled into view */
+.transition-screen .hero-inner.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;600&display=swap');
 
@@ -186,6 +248,7 @@ body {
   color: var(--text);
   overflow: visible;
 }
+
 
 /* HEADLINE */
 .hero-title {
@@ -286,6 +349,9 @@ body {
    margin-left: 90px;   /* 👈 shift right */
 }
 
+
+
+
 .connect-link::after {
   content: "•";
   margin-left: 10px;
@@ -316,22 +382,70 @@ body {
 }
 
 
-/* VIDEO */
-.video-section {
-  text-align: center;
+
+
+/* Grey background section */
+.video-transition-screen {
+  position: relative;
+  background: #e5e5e5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;       /* vertically center */
+  justify-content: center;   /* horizontally center ✅ */
+  overflow: hidden;
+
+  /* start hidden + pushed down */
+  opacity: 0;
+  transform: translateY(120px);
+  transition: all 1.2s ease;
+
+
 }
+
+.video-section.section.transition-screen {
+  position: relative;
+  background: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+  overflow: hidden;
+}
+
+
+/* When in view */
+.video-transition-screen.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Video inside */
 .video-preview {
   position: relative;
   display: inline-block;
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+
+  /* start hidden + pushed down */
+  opacity: 0;
+  transform: translateY(120px);
+  transition: all 1.2s ease 0.2s; /* delay for stagger */
 }
+
+.video-transition-screen.in-view .video-preview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .video-preview img {
-  width: 1050px;
-  max-width: 120%;
+  width: 100%;
+  max-width: 1050px;   /* or any limit you prefer */
   display: block;
 }
+
+
+/* Overlay text/buttons */
 .video-overlay-top {
   position: absolute;
   top: 20px;
@@ -366,16 +480,40 @@ body {
   cursor: pointer;
 }
 
-.video-footer{
-  margin-top:15px;
-  font-size:20px;
-  font-weight:600;
+.video-footer {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 600;
 }
+/* VIDEO SECTION TRANSITION */
+.video-section .video-preview {
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 1.2s ease;
+}
+
+.video-section .video-preview.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* -------- Fonts --------
    Add this to public/index.html <head> (or in your _document if Next.js):
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 */
+
+
+
 
 .listings {
   background: #FBF7F3;
@@ -519,6 +657,13 @@ body {
   padding-left: 60px;
   padding-right: 60px;
 }
+
+
+
+
+
+
+
 
 /* Responsive tweaks */
 @media (max-width: 1280px) {
@@ -712,8 +857,8 @@ body {
 
 
 
-/* PROJECT INTRO */
-.project-intro {
+/* HERO BANNER */
+.hero-banner {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -723,13 +868,13 @@ body {
   overflow: hidden;
 }
 
-.project-intro-img {
+.hero-banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.project-overlay {
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -743,23 +888,24 @@ body {
   padding: 2rem;
 }
 
-.project-text h2 {
+.hero-text h2 {
   font-size: 2.2rem;
   font-weight: 500;
   color: #fff;
   line-height: 1.4;
 }
 
-.project-text h2 em {
+.hero-text h2 em {
   font-style: italic;
 }
 
-.project-name {
+.hero-name {
   margin-top: 19rem;
   color: #fff;
   font-size: 2.4rem;
   letter-spacing: 2px;
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Montserrat:wght@300;400;600&display=swap');
 
@@ -788,9 +934,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: flex-start;  /* keep left aligned */
 }
 
-/* Heading */
 .section-heading {
   font-family: 'Playfair Display', serif;
   font-size: 56px;
@@ -798,29 +944,31 @@ body {
   margin: 0;
   color: #111;
   font-weight: 400;
+  text-align: left;
+  white-space: nowrap;  /* keeps it in one line */
 }
+
 
 .section-heading em {
   font-style: italic;
   font-weight: 700;
-  position: relative;
-  top: -62px;     /* move up */
-  left: 380px;     /* move right */
+  position: static;   /* remove offsets */
 }
+
 
 
 .intro {
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.7;
   color: #666;
-  margin: -8px 0 20px -1px;  /* shifted 20px left */
+  margin: 20px 0 20px -1px;  /* pushed 20px down */
   max-width: 540px;
   background: none;
   border: none;
   box-shadow: none;
-  
 }
+
 
 
 
@@ -830,14 +978,15 @@ body {
   align-items: center;       /* vertically center items */
   gap: 10px;                 /* space between text blocks */
   flex-wrap: nowrap;         /* keep everything on one line */
-  margin-top: -250px;         /* move entire block upward */
+  margin-top: -10px;         /* move entire block upward */
   position: relative;        /* so margin-top works predictably */
+   align-items: flex-start; 
 }
 
 /* Features text stays in one horizontal line */
 .features p {
   font-family: 'Playfair Display', serif;
-  font-size: 31px;
+  font-size: 45px;
   line-height: 1.1;
   color: #c4b4b4;
   font-weight: 400;
@@ -849,27 +998,26 @@ body {
 
 /* Resort block */
 .resort-block {
-  max-width: 240px;   /* widen so text flows into ~3 lines */
-  color: #f00404;
+  max-width: 220px;   /* reduced width so text wraps into fewer lines */
+  flex-shrink: 0; 
+  margin-top: 180px;
+  margin-left: -55px     /* prevents shrinking when space is tight */
 }
 
 .resort-block h4 {
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  margin: 300px 0 8px 0;   /* ↑ increased top margin to move lower */
+  margin: 40px 0 12px 0;   /* cleaner spacing */
   font-weight: 700;
   font-style: italic;
-  color: #1cc869;
+  color: #101111;
 }
+
 .resort-block p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  line-height: 1.5;          /* restore natural spacing */
-  margin: 20px -50 1px 0;     /* smaller top margin */
-  color: #6814c1;
-  max-width: 600px;          /* wider text block = fewer line breaks */
-  white-space: normal;       /* ensure normal wrapping */
+  max-width: 220px;   /* match the container */
+  white-space: normal; /* allow natural wrapping */
 }
+
 
 
 .view-link {
@@ -878,12 +1026,12 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
-  color: #a01d79;
+  color: #080808;
   letter-spacing: 0.5px;
 }
 
 .view-link .dot {
-  color: #d99a3b;
+  color: #090909;
   font-size: 12px;
   margin-left: 6px;
 }
@@ -1449,4 +1597,18 @@ body {
   }
 
   .social-icons { gap: 12px; }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+.hero-name .arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  color: orange;
+}
+
+.hero-name .arrow:hover {
+  transform: translateX(4px);
 }

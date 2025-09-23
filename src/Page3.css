@@ -84,6 +84,7 @@ position: absolute; bottom: 0px; /* lock to bottom */ left: 40px; /* lock to lef
 
 .communities-hero-text {
   text-align: left;
+   margin-top: 540px;
 }
 
 .communities-hero-text .subtitle {
@@ -483,6 +484,8 @@ position: absolute; bottom: 0px; /* lock to bottom */ left: 40px; /* lock to lef
 
   .social-icons { gap: 12px; }
 }
+
+
 
 
 
